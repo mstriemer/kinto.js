@@ -2,10 +2,28 @@
 
 import BaseAdapter from "./adapters/base";
 import { waterfall } from "./utils";
-import { cleanRecord } from "kinto-api.js/lib";
 
 import { v4 as uuid4 } from "uuid";
 import { deepEquals, isUUID, pFinally } from "./utils";
+
+
+const RECORD_FIELDS_TO_CLEAN = ["_status", "last_modified"];
+
+/**
+ * Cleans a record object, excluding passed keys.
+ *
+ * @param  {Object} record        The record object.
+ * @param  {Array}  excludeFields The list of keys to exclude.
+ * @return {Object}               A clean copy of source record object.
+ */
+export function cleanRecord(record, excludeFields=RECORD_FIELDS_TO_CLEAN) {
+  return Object.keys(record).reduce((acc, key) => {
+    if (excludeFields.indexOf(key) === -1) {
+      acc[key] = record[key];
+    }
+    return acc;
+  }, {});
+}
 
 /**
  * Synchronization result object.
