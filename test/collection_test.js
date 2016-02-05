@@ -10,6 +10,7 @@ import IDB from "../src/adapters/IDB";
 import BaseAdapter from "../src/adapters/base";
 import Collection, { SyncResultObject } from "../src/collection";
 import Api from "kinto-api.js";
+import { cleanRecord } from "../src/collection";
 import { updateTitleWithDelay, fakeServerResponse } from "./test_utils";
 
 chai.use(chaiAsPromised);
@@ -66,6 +67,16 @@ describe("Collection", () => {
 
   afterEach(() => {
     sandbox.restore();
+  });
+
+  describe("Helpers", () => {
+    /** @test {cleanRecord} */
+    describe("#cleanRecord", () => {
+      it("should clean record data", () => {
+        expect(cleanRecord({title: "foo", _status: "foo"}))
+          .eql({title: "foo"});
+      });
+    });
   });
 
   /** @test {Collection#constructor} */

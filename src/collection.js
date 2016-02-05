@@ -697,6 +697,14 @@ export default class Collection {
     // Fetch local changes
     return this.gatherLocalChanges()
       .then(({toDelete, toSync}) => {
+        // XXX this name stinks
+        const batchChanges = toSync.map(record => {
+          if (record._status === "deleted") {
+            return cleanRecord(Object.assign({}, record, {deleted: true}));
+          } else {
+            return record;
+          }
+        });
         return Promise.all([
           // Delete never synced records marked for deletion
           this.db.execute((transaction) => {
@@ -705,7 +713,7 @@ export default class Collection {
             });
           }),
           // Send batch update requests
-          this.api.batch(this.bucket, this.name, toSync, options)
+          this.api.batch(this.bucket, this.name, batchChanges, options)
         ]);
       })
       // Update published local records
