@@ -1,6 +1,6 @@
 "use strict";
 
-import Api from "./api";
+import Api from "kinto-api.js";
 import Collection from "./collection";
 import BaseAdapter from "./adapters/base";
 

@@ -9,7 +9,7 @@ import { v4 as uuid4 } from "uuid";
 import IDB from "../src/adapters/IDB";
 import BaseAdapter from "../src/adapters/base";
 import Collection, { SyncResultObject } from "../src/collection";
-import Api from "../src/api";
+import Api from "kinto-api.js";
 import { updateTitleWithDelay, fakeServerResponse } from "./test_utils";
 
 chai.use(chaiAsPromised);

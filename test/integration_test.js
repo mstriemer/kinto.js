@@ -7,7 +7,7 @@ import chai, { expect } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import sinon from "sinon";
 import Kinto from "../src";
-import { cleanRecord } from "../src/api";
+import { cleanRecord } from "kinto-api.js";
 
 chai.use(chaiAsPromised);
 chai.should();

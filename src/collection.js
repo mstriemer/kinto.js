@@ -2,7 +2,7 @@
 
 import BaseAdapter from "./adapters/base";
 import { waterfall } from "./utils";
-import { cleanRecord } from "./api";
+import { cleanRecord } from "kinto-api.js/lib";
 
 import { v4 as uuid4 } from "uuid";
 import { deepEquals, isUUID, pFinally } from "./utils";
